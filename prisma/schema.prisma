@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  ID        Int        @id(map: "PK__Role__3214EC272859286C") @default(autoincrement())
+  Name      String     @db.VarChar(255)
+  IsDeleted Boolean    @default(false, map: "DF__Role__IsDeleted__276EDEB3")
+  UserRole  UserRole[]
+}
+
+model User {
+  ID        Int        @id(map: "PK__User__3214EC27A0F9D3EA") @default(autoincrement())
+  Username  String     @db.VarChar(255)
+  Password  String     @db.VarChar(255)
+  Email     String     @db.VarChar(255)
+  IsDeleted Boolean    @default(false, map: "DF__User__IsDeleted__24927208")
+  UserRole  UserRole[]
+}
+
+model UserRole {
+  UserID    Int
+  RoleID    Int
+  IsDeleted Boolean @default(false, map: "DF__UserRole__IsDele__2C3393D0")
+  Role      Role    @relation(fields: [RoleID], references: [ID], onUpdate: NoAction, map: "FK__UserRole__RoleID__2B3F6F97")
+  User      User    @relation(fields: [UserID], references: [ID], onUpdate: NoAction, map: "FK__UserRole__UserID__2A4B4B5E")
+
+  @@id([UserID, RoleID], map: "UserRole_PK")
+}

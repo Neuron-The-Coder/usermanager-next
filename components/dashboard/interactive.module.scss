@@ -1,0 +1,15 @@
+.loader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+
+  span{
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}
