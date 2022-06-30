@@ -1,0 +1,33 @@
+===== CACHING | REDIS =====
+
+Obviosly, caching untuk store data temporary
+ntar kl kebanyakan request RIP server DB
+
+Good jika data ga banyak berubah (mungkin cuma fetch all user)
+tapi Bad jika selalu berubah (misla stock market atau cart di commerce)
+
+Dipakai oleh webapp yang trafficnya tinggi dan CDN
+
+Credentials Redis (DEV)
+
+"Redis": {
+  "Server": "10.240.200.115:6379",
+  "Password": "h4t5un3m1ku"
+}
+
+--
+SET <key> <value> EX <second>
+  Set key:value berapa second
+
+GET <key>
+  Ambil key
+
+TTL <key>
+  Berapa lama sebelum datanya hilang
+
+DEL <key>
+  Unset key
+
+INFO
+  Info tentang Redis server
+

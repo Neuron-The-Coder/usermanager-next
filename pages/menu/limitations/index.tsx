@@ -1,7 +1,7 @@
-import Dashboard from "../../components/dashboard/dashboard";
+import Dashboard from "../../../components/dashboard/dashboard";
 import styles from './limitations.module.scss';
 
-export default function Limitations(){
+export default function Index(){
 
   return(
     <Dashboard>

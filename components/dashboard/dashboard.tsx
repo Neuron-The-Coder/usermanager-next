@@ -28,9 +28,6 @@ export interface IInteractiveUtils {
 export default function Dashboard({ children }: { children: JSX.Element }) {
   
   const router = useRouter();
-
-  console.log(router.pathname);
-
   const links : INavLink[] = [
     {
       name : "User",
