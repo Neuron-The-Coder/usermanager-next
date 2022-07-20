@@ -15,7 +15,7 @@ export default async function addUser(
       data : {
         Email : DOMPurify.sanitize(email),
         Username : DOMPurify.sanitize(username),
-        Password : "$2a$12$Oi9MiEqEx37Oo9TfuPgJzedeH1iqGhFYDE6Leuhq/PK9.0fNJOg8C",
+        Password : "$2a$12$Oi9MiEqEx37Oo9TfuPgJzedeH1iqGhFYDE6Leuhq/PK9.0fNJOg8C", // helloWORLD
       }
     });
   

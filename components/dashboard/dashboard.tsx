@@ -26,7 +26,7 @@ export interface IInteractiveUtils {
 }
 
 export default function Dashboard({ children }: { children: JSX.Element }) {
-  
+    
   const router = useRouter();
   const links : INavLink[] = [
     {
@@ -101,6 +101,8 @@ export default function Dashboard({ children }: { children: JSX.Element }) {
         </div>
         <div className={ styles.siteContent }>
           { React.cloneElement(children, { interactive : interactiveUtils }) }
+          {/* { children(interactive) } */}
+
         </div>
       </main>
     </div>

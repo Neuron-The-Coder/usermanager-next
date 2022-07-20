@@ -8,14 +8,14 @@ datasource db {
 }
 
 model Role {
-  ID        Int        @id(map: "PK__Role__3214EC272859286C") @default(autoincrement())
+  ID        Int        @id(map: "PK__Role__3214EC27ADBA5120") @default(autoincrement())
   Name      String     @db.VarChar(255)
   IsDeleted Boolean    @default(false, map: "DF__Role__IsDeleted__276EDEB3")
   UserRole  UserRole[]
 }
 
 model User {
-  ID        Int        @id(map: "PK__User__3214EC27A0F9D3EA") @default(autoincrement())
+  ID        Int        @id(map: "PK__User__3214EC27A64677D2") @default(autoincrement())
   Username  String     @db.VarChar(255)
   Password  String     @db.VarChar(255)
   Email     String     @db.VarChar(255)

@@ -1,5 +1,5 @@
 import Dashboard, { IInteractiveUtils } from "../../../components/dashboard/dashboard";
-import useSWR, { BareFetcher } from "swr";
+import useSWR from "swr";
 import styles from './user.module.scss';
 import rowStyles from './userRow.module.scss';
 import Icon from "../../../components/utils/icon";
@@ -17,6 +17,18 @@ interface IUserRowData {
   email : string
 }
 
+// export async function getServerSideProps() {
+//   if (!(await Auth(Cookies.get('Token')) ?? "")) return {
+//     redirect : {
+//       destination : '/auth/login'
+//     }
+//   }
+
+//   else return {
+//     props : { }
+//   }
+// }
+
 export default function Index({ interactive } : { interactive : IInteractiveUtils }) {
 
   // Fetcher = Ambil data kek aman gitoe. Untuk fetch data aje ye
@@ -31,37 +43,46 @@ export default function Index({ interactive } : { interactive : IInteractiveUtil
     component = (<p>Loading</p>)
   }
 
-  else {
-    // interactive.closeInteractive();
-    component = (
-      <>
-        <h1 className={ styles.title }>Manage Users</h1>
-        <table className="table table-striped table-dark">
-          <thead>
-            <tr>
-              <td width="10%">No</td>
-              <td width="35%">Name</td>
-              <td width="35%">Email</td>
-              <td width="20%">Actions</td>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              data.map((u, idx) => (
-                <UserRow key={ idx } num={ idx } user={ u } refresh={ refresh }></UserRow>
-              ))
-            }
-            <UserAddRow refresh={ refresh } interactive={ interactive }/>
-          </tbody>
-        </table>
-      </>
-    )
-  }
+  else return (
+    <Dashboard>
+      <UserMain data={data} refresh={mutate} interactive={undefined}></UserMain>
+    </Dashboard>
+  )
 
   return (
     <Dashboard>
       { component }
     </Dashboard>
+  )
+}
+
+function UserMain({ interactive, data, refresh } : { interactive : IInteractiveUtils, data : IUserData[], refresh : any }){
+  
+  console.log(interactive);
+  
+  return (
+    <>
+      <h1 className={ styles.title }>Manage Users</h1>
+      <table className="table table-striped table-dark">
+        <thead>
+          <tr>
+            <td width="10%">No</td>
+            <td width="35%">Name</td>
+            <td width="35%">Email</td>
+            <td width="20%">Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            data.map((u, idx) => (
+              <UserRow key={ idx } num={ idx } user={ u } refresh={ refresh }></UserRow>
+            ))
+          }
+          <UserAddRow refresh={ refresh } interactive={ interactive }/>
+        </tbody>
+        
+      </table>
+    </>
   )
 }
 
@@ -81,12 +102,12 @@ function UserAddRow({ refresh, interactive } : { refresh() : void, interactive :
       return
     }
 
-    // interactive.showLoading();
+    interactive.showLoading();
     let result = await axios.post('/api/user/addUser', userAddRowData);
     
     if (result.status == 200) refresh();
     setIsAdd(false);
-    // interactive.closeInteractive();
+    interactive.closeInteractive();
 
     setUserAddRowData({
       username : "",

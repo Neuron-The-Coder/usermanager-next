@@ -9,3 +9,4 @@ export const prisma = new PrismaClient();
 
 // Avoid dis in prod wkkwkwkwkw
 // if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
+
